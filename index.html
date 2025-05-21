@@ -9,1192 +9,1402 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
         
-     :root {
-        --primary: #ff4d5a;
-        --secondary: #6c63ff;
-        --dark: #2d3748;
-        --light: #f7fafc;
-        --accent1: #00c9a7;
-        --accent2: #845ec2;
-        --accent3: #ff9671;
-    }
-    
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #0f172a;
-        color: var(--light);
-    }
-    
-    h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 600;
-    }
-    
-    .gradient-text {
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-    
-    .gradient-bg {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-    }
-    
-    .card {
-        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-        position: relative;
-        overflow: hidden;
-        border-radius: 1rem;
-    }
-    
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
-        z-index: 1;
-    }
-    
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-    }
-    
-    .card-content {
-        position: relative;
-        z-index: 2;
-    }
-    
-    .btn {
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-    }
-    
-    .btn::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255,255,255,0.2);
-        z-index: -1;
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 0.5s ease;
-    }
-    
-    .btn:hover::after {
-        transform: scaleX(1);
-        transform-origin: left;
-    }
-    
-    .nav-link {
-        position: relative;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--primary);
-        transition: width 0.3s ease;
-    }
-    
-    .nav-link:hover::after {
-        width: 100%;
-    }
-    
-    .slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        transform: scale(0.9);
-        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        pointer-events: none;
-    }
-    
-    .slide.active {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-    }
-    
-    .progress-bar {
-        height: 4px;
-        background: rgba(255,255,255,0.2);
-        border-radius: 2px;
-        overflow: hidden;
-    }
-    
-    .progress {
-        height: 100%;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        border-radius: 2px;
-        transition: width 0.5s ease;
-    }
-    
-    .project-card {
-        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-        transform-style: preserve-3d;
-        perspective: 1000px;
-    }
-    
-    .project-card:hover {
-        transform: translateY(-10px) rotateX(5deg);
-    }
-    
-    .project-card:hover .card-overlay {
-        opacity: 1;
-    }
-    
-    .card-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-    
-    .modal {
-        transform: scale(0.8);
-        opacity: 0;
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    
-    .modal.active {
-        transform: scale(1);
-        opacity: 1;
-    }
-    
-    .bg-economia {
-        background: linear-gradient(135deg, #2c3e50, #4ca1af);
-    }
-    
-    .bg-almacen {
-        background: linear-gradient(135deg, #8e2de2, #4a00e0);
-    }
-    
-    .bg-podcast {
-        background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    }
-    
-    .bg-reels {
-        background: linear-gradient(135deg, #f7971e, #ffd200);
-    }
-    
-    .bg-economia-card {
-        background: linear-gradient(135deg, #56ab2f, #a8e063);
-    }
-    
-    .bg-calma-card {
-        background: linear-gradient(135deg, #8e2de2, #4a00e0);
-    }
-    
-    .bg-ninez-card {
-        background: linear-gradient(135deg, #2193b0, #6dd5ed);
-    }
-    
-    .scroll-indicator {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        z-index: 9999;
-        transition: width 0.1s ease;
-    }
-    
-    .download-btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .download-btn::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: conic-gradient(transparent, rgba(255,255,255,0.3), transparent 30%);
-        animation: rotate 4s linear infinite;
-    }
-    
-    @keyframes rotate {
-        100% {
-            transform: rotate(1turn);
+        :root {
+            --primary: #ff4d5a;
+            --secondary: #6c63ff;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --accent1: #00c9a7;
+            --accent2: #845ec2;
+            --accent3: #ff9671;
         }
-    }
-    
-    .download-btn::after {
-        content: '';
-        position: absolute;
-        inset: 3px;
-        background: inherit;
-        border-radius: inherit;
-        z-index: 1;
-    }
-    
-    .download-btn span {
-        position: relative;
-        z-index: 2;
-    }
-    
-    .noise {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.05;
-        pointer-events: none;
-        z-index: 9997;
-    }
-    
-    .section-title {
-        position: relative;
-        display: inline-block;
-    }
-    
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 60%;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary), transparent);
-    }
-    
-    .slide-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-    }
-    
-    .slide-bg svg {
-        width: 100%;
-        height: 100%;
-        opacity: 0.1;
-    }
-    
-    .slide-content {
-        position: relative;
-        z-index: 1;
-    }
-    
-    .icon-box {
-        width: 50px;
-        height: 50px;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        margin-right: 1rem;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(10px);
-    }
-    
-    .tag {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(5px);
-    }
-    
-    .glass-card {
-        background: rgba(255,255,255,0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 1rem;
-    }
-    
-    .loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0f172a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    
-    .loader.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-    
-    .loader-content {
-        text-align: center;
-    }
-    
-    .loader-spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid rgba(255,255,255,0.1);
-        border-top-color: var(--primary);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-        100% {
-            transform: rotate(360deg);
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    }
-    
-    .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s ease;
-    }
-    
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .profile-description {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background: rgba(255,255,255,0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
-        line-height: 1.8;
-    }
-    
-    .video-container {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        height: 0;
-        overflow: hidden;
-        border-radius: 1rem;
-        background-color: #000;
-    }
-    
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 1rem;
-        border: none;
-    }
-    
-    .spotify-container {
-        width: 100%;
-        border-radius: 1rem;
-        overflow: hidden;
-        background-color: #000;
-        position: relative;
-    }
-    
-    .instagram-container {
-        width: 100%;
-        border-radius: 1rem;
-        overflow: hidden;
-        background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
-        position: relative;
-        padding-bottom: 125%; /* Instagram aspect ratio */
-    }
-    
-    .instagram-placeholder {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-    }
-    
-    .instagram-placeholder i {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-    
-    .custom-embed {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        border-radius: 1rem;
-    }
-    
-    .custom-embed iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    
-    /* Nuevos estilos para los proyectos */
-    .project-icon {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(5px);
-        border-radius: 12px;
-        font-size: 1.8rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        border: 1px solid rgba(255,255,255,0.2);
-        z-index: 5;
-    }
-</style>
-
-<!-- Noise Texture -->
-<div class="noise"></div>
-
-<!-- Scroll Progress Indicator -->
-<div class="scroll-indicator"></div>
-
-<div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="fixed top-0 left-0 w-full py-6 px-4 md:px-8 z-50 transition-all duration-300" id="header">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center mb-4 md:mb-0">
-                <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
-                    <span class="text-white font-bold">M</span>
-                </div>
-                <h1 class="text-2xl font-bold">Mauro Limas<span class="gradient-text">, Portfolio</span></h1>
-            </div>
-            
-            <nav class="flex space-x-6 items-center">
-                <a href="#hero" class="nav-link text-white hover:text-gray-300 transition">Inicio</a>
-                <a href="#proyectos" class="nav-link text-white hover:text-gray-300 transition">Proyectos</a>
-                <a href="#otros" class="nav-link text-white hover:text-gray-300 transition">Otros Trabajos</a>
-                <button id="downloadBtn" class="download-btn bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 py-2 rounded-full hover:shadow-lg transition">
-                    <span class="flex items-center">
-                        <i class="fas fa-download mr-2"></i> Descargar
-                    </span>
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-4 md:px-8">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 reveal">Mauro Limas <span class="gradient-text">Portfolio</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 reveal" style="animation-delay: 0.2s">Creación de contenidos y proyectos audiovisuales con impacto social</p>
-            
-            <!-- Perfil más desarrollado -->
-            <div class="profile-description mb-10 reveal" style="animation-delay: 0.3s">
-                <p class="text-lg">Diseño y produzco videos, campañas, publicaciones y estrategias para marcas, proyectos y organizaciones. Trabajo con una narrativa clara, visual y foco en llegar con impacto al público deseado.</p>
-            </div>
-            
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 reveal" style="animation-delay: 0.4s">
-                <a href="#proyectos" class="btn bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full hover:shadow-lg transition">
-                    Ver Proyectos
-                </a>
-                <a href="#contacto" class="btn bg-transparent border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition">
-                    Contacto
-                </a>
-            </div>
-            
-            <div class="mt-16 reveal" style="animation-delay: 0.6s">
-                <a href="#proyectos" class="inline-block animate-bounce">
-                    <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Proyectos Destacados -->
-    <section id="proyectos" class="py-20 px-4 md:px-8">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Proyectos Destacados</h2>
-            
-            <div class="relative h-[600px] md:h-[700px] reveal" style="animation-delay: 0.2s">
-                <!-- Slides Container -->
-                <div class="slides-container relative h-full rounded-2xl overflow-hidden shadow-2xl">
-                    <!-- Slide 1 -->
-                    <div class="slide active h-full bg-economia" data-slide-index="0">
-                        <div class="slide-bg">
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="currentColor" d="M45.7,-77.8C59.5,-71.2,71.3,-59.3,79.7,-45.1C88.1,-30.9,93.2,-15.5,92.9,-0.2C92.6,15.1,87,30.1,78.2,42.9C69.4,55.7,57.5,66.2,43.7,73.5C29.9,80.8,14.9,84.9,-0.2,85.2C-15.3,85.5,-30.6,82,-43.9,74.5C-57.2,67,-68.5,55.5,-76.3,42C-84.1,28.5,-88.5,14.2,-87.8,0.4C-87.1,-13.5,-81.4,-27,-73.3,-39.2C-65.2,-51.4,-54.7,-62.3,-42.1,-69.7C-29.5,-77.1,-14.7,-81.1,0.8,-82.4C16.3,-83.8,32.5,-82.5,45.7,-77.8Z" transform="translate(100 100)" />
-                            </svg>
-                        </div>
-                        <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
-                            <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                                <div class="flex items-center mb-6">
-                                    <div class="icon-box">
-                                        <span>🎬</span>
-                                    </div>
-                                    <h3 class="text-2xl md:text-3xl font-bold">EL PODER DE LA ECONOMÍA POPULAR Y SOLIDARIA</h3>
-                                </div>
-                                
-                                <div class="flex items-center mb-4">
-                                    <span class="tag">📌 Guión y producción</span>
-                                </div>
-                                
-                                <div class="glass-card p-6 mb-8">
-                                    <p class="text-lg">Serie audiovisual que visibiliza experiencias organizativas y productivas de la economía popular en clave de soberanía, trabajo y comunidad.</p>
-                                </div>
-                                
-                                <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openYoutubeInNewTab('https://youtu.be/64e3EK55jOE?si=b9C85yEAjC7pTyPN')">
-                                    <span class="mr-2">🎥</span> Ver más
-                                </button>
-                            </div>
-                            
-                            <div class="w-full md:w-1/2">
-                                <div class="video-container">
-                                    <iframe id="youtube-frame-1" class="media-frame" width="100%" height="315" src="https://www.youtube.com/embed/64e3EK55jOE?enablejsapi=1" 
-                                    frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 2 -->
-                    <div class="slide h-full bg-almacen" data-slide-index="1">
-                        <div class="slide-bg">
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="currentColor" d="M47.7,-79.1C62.9,-71.9,77,-60.9,84.6,-46.4C92.3,-31.8,93.5,-13.6,90.1,3.4C86.8,20.4,78.9,36.2,68.2,49.7C57.4,63.2,43.8,74.3,28.5,79.9C13.2,85.5,-3.9,85.6,-19.7,80.9C-35.6,76.3,-50.2,67,-62.1,54.5C-74,42,-83.2,26.4,-87.6,8.6C-92,-9.2,-91.6,-29.1,-83.2,-44.9C-74.8,-60.7,-58.4,-72.3,-41.9,-78.8C-25.4,-85.3,-8.8,-86.7,6.9,-87.7C22.5,-88.7,45.1,-89.3,47.7,-79.1Z" transform="translate(100 100)" />
-                            </svg>
-                        </div>
-                        <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
-                            <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                                <div class="flex items-center mb-6">
-                                    <div class="icon-box">
-                                        <span>🛒</span>
-                                    </div>
-                                    <h3 class="text-2xl md:text-3xl font-bold">INAUGURACIÓN NUEVO ALMACÉN DE ALIMENTOS COOPERATIVOS</h3>
-                                </div>
-                                
-                                <div class="flex items-center mb-4">
-                                    <span class="tag">📌 Realización</span>
-                                </div>
-                                
-                                <div class="glass-card p-6 mb-8">
-                                    <p class="text-lg">Cobertura integral del evento de apertura del nuevo almacén cooperativo en CABA. Registro audiovisual con entrevistas, ambiente y puesta en escena del proyecto.</p>
-                                </div>
-                                
-                                <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openYoutubeInNewTab('https://youtu.be/h2ZX7HWpH-0?si=t5P3_4xiY9rh_yHo')">
-                                    <span class="mr-2">🎥</span> Ver más
-                                </button>
-                            </div>
-                            
-                            <div class="w-full md:w-1/2">
-                                <div class="video-container">
-                                    <iframe id="youtube-frame-2" class="media-frame" width="100%" height="315" src="https://www.youtube.com/embed/h2ZX7HWpH-0?enablejsapi=1" 
-                                    frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 3 -->
-                    <div class="slide h-full bg-podcast" data-slide-index="2">
-                        <div class="slide-bg">
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="currentColor" d="M38.5,-66.2C51.9,-59.3,66.2,-52.1,75.7,-40.1C85.2,-28.1,89.9,-11.3,88.8,5.2C87.7,21.7,80.8,37.9,70.3,51.5C59.8,65.1,45.6,76.1,29.8,81.6C14,87.1,-3.5,87.1,-19.6,82.3C-35.7,77.5,-50.5,67.9,-62.2,55C-73.9,42.1,-82.5,25.9,-85.2,8.3C-87.9,-9.3,-84.7,-28.3,-75.3,-43.1C-65.9,-57.9,-50.3,-68.5,-35,-73.3C-19.7,-78.1,-4.9,-77.1,8.2,-72.1C21.3,-67.1,42.6,-58.1,38.5,-66.2Z" transform="translate(100 100)" />
-                            </svg>
-                        </div>
-                        <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
-                            <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                                <div class="flex items-center mb-6">
-                                    <div class="icon-box">
-                                        <span>🎙️</span>
-                                    </div>
-                                    <h3 class="text-2xl md:text-3xl font-bold">SOBERANÍA PARLANTE – PODCAST</h3>
-                                </div>
-                                
-                                <div class="flex items-center mb-4">
-                                    <span class="tag">📌 Producción</span>
-                                </div>
-                                
-                                <div class="glass-card p-6 mb-8">
-                                    <p class="text-lg">Podcast dedicado a reflexionar sobre soberanía alimentaria, comunicación popular y políticas públicas con voces del territorio.</p>
-                                </div>
-                                
-                                <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openSpotifyInNewTab('https://open.spotify.com/show/3FpQdnt5Cly1z5AOcmJCuh')">
-                                    <span class="mr-2">🎧</span> Escuchar
-                                </button>
-                            </div>
-                            
-                            <div class="w-full md:w-1/2">
-                                <div class="custom-embed">
-                                    <iframe id="spotify-frame" class="media-frame" style="border-radius:12px" src="https://open.spotify.com/embed/show/3FpQdnt5Cly1z5AOcmJCuh?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 4 -->
-                    <div class="slide h-full bg-reels" data-slide-index="3">
-                        <div class="slide-bg">
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="currentColor" d="M44.2,-76.3C58.4,-69.2,71.9,-59.3,79.8,-45.8C87.7,-32.3,90,-15.1,88.6,1.4C87.2,17.9,82.1,33.8,73.2,47.4C64.3,61,51.6,72.3,37,79.1C22.4,85.9,5.9,88.2,-10.2,86.6C-26.3,85,-42,79.5,-54.8,70C-67.6,60.5,-77.5,47,-83.3,31.8C-89.1,16.6,-90.8,-0.3,-87.2,-15.8C-83.6,-31.3,-74.7,-45.3,-62.6,-56.1C-50.5,-66.9,-35.2,-74.5,-19.9,-77.7C-4.6,-80.9,10.8,-79.8,25.9,-77.1C41,-74.4,55.9,-70.1,44.2,-76.3Z" transform="translate(100 100)" />
-                            </svg>
-                        </div>
-                        <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
-                            <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                                <div class="flex items-center mb-6">
-                                    <div class="icon-box">
-                                        <span>📲</span>
-                                    </div>
-                                    <h3 class="text-2xl md:text-3xl font-bold">REELS DE ALIMENTOS COOPERATIVOS</h3>
-                                </div>
-                                
-                                <div class="flex items-center mb-4">
-                                    <span class="tag">📌 Realización</span>
-                                </div>
-                                
-                                <div class="glass-card p-6 mb-8">
-                                    <p class="text-lg">Producción de contenido audiovisual breve y potente para redes sociales, centrado en productos, actividades y valores de la red Alimentos Cooperativos.</p>
-                                </div>
-                                
-                                <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openInstagramInNewTab('https://www.instagram.com/alimentoscooperativos/reels/')">
-                                    <span class="mr-2">📱</span> Ver más
-                                </button>
-                            </div>
-                            
-                            <div class="w-full md:w-1/2">
-                                <div class="instagram-container">
-                                    <div class="instagram-placeholder" onclick="openInstagramInNewTab('https://www.instagram.com/reel/DAb2ObEO3Rq/')">
-                                        <i class="fab fa-instagram"></i>
-                                        <h3 class="text-xl font-bold mb-2">Reels de Alimentos Cooperativos</h3>
-                                        <p class="mb-4">Haz clic para ver en Instagram</p>
-                                        <button class="px-6 py-2 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition">Ver en Instagram</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Slide Controls -->
-                <div class="absolute bottom-8 left-0 right-0 flex justify-center items-center space-x-4 z-10">
-                    <button id="prevSlide" class="w-12 h-12 rounded-full bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition">
-                        <i class="fas fa-chevron-left text-white"></i>
-                    </button>
-                    
-                    <div class="progress-bar w-32 md:w-64">
-                        <div class="progress" style="width: 25%"></div>
-                    </div>
-                    
-                    <button id="nextSlide" class="w-12 h-12 rounded-full bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition">
-                        <i class="fas fa-chevron-right text-white"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Otros Proyectos -->
-    <section id="otros" class="py-20 px-4 md:px-8 bg-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Otros Proyectos</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal" style="animation-delay: 0.2s">
-                <!-- Proyecto 1 -->
-                <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('economias')">
-                    <div class="absolute inset-0 bg-economia-card"></div>
-                    <div class="project-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
-                        <h3 class="text-2xl font-bold mb-2">ECONOMÍAS REGIONALES</h3>
-                        <p class="text-white text-opacity-80 mb-4">📌 Producción y realización</p>
-                        <div class="card-overlay">
-                            <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
-                                <span class="mr-2">🎥</span> Ver detalles
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Proyecto 2 -->
-                <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('calma')">
-                    <div class="absolute inset-0 bg-calma-card"></div>
-                    <div class="project-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
-                        <h3 class="text-2xl font-bold mb-2">CALMA</h3>
-                        <p class="text-white text-opacity-80 mb-4">📌 Branding</p>
-                        <div class="card-overlay">
-                            <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
-                                <span class="mr-2">🕯️</span> Ver detalles
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Proyecto 3 -->
-                <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('ninez')">
-                    <div class="absolute inset-0 bg-ninez-card"></div>
-                    <div class="project-icon">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
-                        <h3 class="text-2xl font-bold mb-2">DESARROLLO SOCIAL – NIÑEZ</h3>
-                        <p class="text-white text-opacity-80 mb-4">📌 Producción</p>
-                        <div class="card-overlay">
-                            <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
-                                <span class="mr-2">👶</span> Ver detalles
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contacto" class="py-20 px-4 md:px-8">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Contacto</h2>
-            
-            <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 reveal" style="animation-delay: 0.2s">
-                <div class="flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                        <h3 class="text-2xl font-bold mb-4">¿Interesado en trabajar juntos?</h3>
-                        <p class="text-gray-300 mb-6">Estoy disponible para nuevos proyectos de comunicación digital y creación de contenidos. Contáctame para discutir cómo puedo ayudarte.</p>
-                        
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-white"></i>
-                            </div>
-                            <span>mglimas@gmail.com</span>
-                        </div>
-                        
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
-                                <i class="fas fa-phone text-white"></i>
-                            </div>
-                            <span>11 5489 5992</span>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt text-white"></i>
-                            </div>
-                            <span>CABA, Argentina</span>
-                        </div>
-                    </div>
-                    
-                    <div class="w-full md:w-1/2">
-                        <div class="flex justify-center mb-6">
-                            <button class="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition" onclick="openLinkedInInNewTab('https://www.linkedin.com/in/mauro-limas/')">
-                                <i class="fab fa-linkedin-in text-white"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="glass-card p-6">
-                            <p class="text-center text-lg mb-4">¿Listo para comenzar un proyecto?</p>
-                           <a href="mailto:mglimas@gmail.com?subject=Hola%20Mauro&body=Hola%20Mauro,%20vi%20tu%20portfolio%20y%20quiero%20hablar..." class="block w-full btn bg-gradient-to-r from-pink-500 to-purple-500 text-white py-3 rounded-full hover:shadow-lg transition text-center">
-  Enviame un mail
-</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="py-8 px-4 md:px-8 border-t border-gray-800">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <p class="text-gray-400">© 2025 Mauro Limas. Todos los derechos reservados.</p>
-            </div>
-            
-            <div>
-                <button id="backToTop" class="px-4 py-2 rounded-full bg-white bg-opacity-10 text-white hover:bg-opacity-20 transition flex items-center">
-                    <i class="fas fa-arrow-up mr-2"></i> Volver arriba
-                </button>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Modals -->
-    <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-80 backdrop-filter backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div id="modalContent" class="modal bg-gray-900 rounded-2xl shadow-2xl max-w-lg w-full p-8 relative">
-            <button id="closeModal" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
-                <i class="fas fa-times text-white"></i>
-            </button>
-            <div id="modalBody"></div>
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+        
+        .btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+        
+        .project-card:hover .card-overlay {
+            opacity: 1;
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .modal {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .modal.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .bg-economia {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+        }
+        
+        .bg-almacen {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        }
+        
+        .bg-podcast {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+        
+        .bg-reels {
+            background: linear-gradient(135deg, #f7971e, #ffd200);
+        }
+        
+        .bg-economia-card {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+        }
+        
+        .bg-calma-card {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        }
+        
+        .bg-ninez-card {
+            background: linear-gradient(135deg, #2193b0, #6dd5ed);
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        .download-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(255,255,255,0.3), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% {
+                transform: rotate(1turn);
+            }
+        }
+        
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: inherit;
+            border-radius: inherit;
+            z-index: 1;
+        }
+        
+        .download-btn span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9997;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .slide-bg svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .glass-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+        }
+        
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .profile-description {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            line-height: 1.8;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            border: none;
+        }
+        
+        .spotify-container {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            background-color: #000;
+            position: relative;
+        }
+        
+        .instagram-container {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+            position: relative;
+            padding-bottom: 125%; /* Instagram aspect ratio */
+        }
+        
+        .instagram-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .instagram-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .custom-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .custom-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Nuevos estilos para los proyectos */
+        .project-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 5;
+        }
+        
+        /* Estilos para el contenedor de reemplazo de Spotify */
+        .spotify-replacement {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1DB954, #191414);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 1rem;
+        }
+        
+        .spotify-replacement i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos para el footer */
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-email {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-email a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted rgba(255,255,255,0.5);
+            padding-bottom: 2px;
+        }
+        
+        .footer-email a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner mx-auto mb-4"></div>
+            <h2 class="text-2xl font-bold gradient-text">Cargando Portfolio</h2>
         </div>
     </div>
-</div>
+    
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator"></div>
+    
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 w-full py-6 px-4 md:px-8 z-50 transition-all duration-300" id="header">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold">M</span>
+                    </div>
+                    <h1 class="text-2xl font-bold">Mauro Limas<span class="gradient-text">, Portfolio</span></h1>
+                </div>
+                
+                <nav class="flex space-x-6 items-center">
+                    <a href="#hero" class="nav-link text-white hover:text-gray-300 transition">Inicio</a>
+                    <a href="#proyectos" class="nav-link text-white hover:text-gray-300 transition">Proyectos</a>
+                    <a href="#otros" class="nav-link text-white hover:text-gray-300 transition">Otros Trabajos</a>
+                    <a href="#contacto" class="nav-link text-white hover:text-gray-300 transition">Contacto</a>
+                    <button id="downloadBtn" class="download-btn bg-gradient-to-r from-pink-500 to-purple-500 text-white px-5 py-2 rounded-full hover:shadow-lg transition">
+                        <span class="flex items-center">
+                            <i class="fas fa-download mr-2"></i> Descargar
+                        </span>
+                    </button>
+                </nav>
+            </div>
+        </header>
 
-<!-- YouTube API -->
-<script src="https://www.youtube.com/iframe_api"></script>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-4 md:px-8">
+            <div class="container mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 reveal">Mauro Limas <span class="gradient-text">Portfolio</span></h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 reveal" style="animation-delay: 0.2s">Creación de contenidos y proyectos audiovisuales con impacto social</p>
+                
+                <!-- Perfil más desarrollado -->
+                <div class="profile-description mb-10 reveal" style="animation-delay: 0.3s">
+                    <p class="text-lg">Diseño y produzco videos, campañas, publicaciones y estrategias para marcas, proyectos y organizaciones. Trabajo con una narrativa clara, visual y foco en llegar con impacto al público deseado.</p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 reveal" style="animation-delay: 0.4s">
+                    <a href="#proyectos" class="btn bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full hover:shadow-lg transition">
+                        Ver Proyectos
+                    </a>
+                    <a href="#contacto" class="btn bg-transparent border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition">
+                        Contacto
+                    </a>
+                </div>
+                
+                <div class="mt-16 reveal" style="animation-delay: 0.6s">
+                    <a href="#proyectos" class="inline-block animate-bounce">
+                        <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-<script>
-    // Variables para los reproductores de YouTube
-    let youtubePlayer1 = null;
-    let youtubePlayer2 = null;
-    let currentSlideIndex = 0;
-    
-    // Loader
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            document.querySelector('.loader').classList.add('hidden');
-        }, 1000);
-    });
-    
-    // Scroll progress indicator
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    
-    window.addEventListener('scroll', function() {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        scrollIndicator.style.width = scrolled + '%';
+        <!-- Proyectos Destacados -->
+        <section id="proyectos" class="py-20 px-4 md:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Proyectos Destacados</h2>
+                
+                <div class="relative h-[600px] md:h-[700px] reveal" style="animation-delay: 0.2s">
+                    <!-- Slides Container -->
+                    <div class="slides-container relative h-full rounded-2xl overflow-hidden shadow-2xl">
+                        <!-- Slide 1 -->
+                        <div class="slide active h-full bg-economia" data-slide-index="0">
+                            <div class="slide-bg">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M45.7,-77.8C59.5,-71.2,71.3,-59.3,79.7,-45.1C88.1,-30.9,93.2,-15.5,92.9,-0.2C92.6,15.1,87,30.1,78.2,42.9C69.4,55.7,57.5,66.2,43.7,73.5C29.9,80.8,14.9,84.9,-0.2,85.2C-15.3,85.5,-30.6,82,-43.9,74.5C-57.2,67,-68.5,55.5,-76.3,42C-84.1,28.5,-88.5,14.2,-87.8,0.4C-87.1,-13.5,-81.4,-27,-73.3,-39.2C-65.2,-51.4,-54.7,-62.3,-42.1,-69.7C-29.5,-77.1,-14.7,-81.1,0.8,-82.4C16.3,-83.8,32.5,-82.5,45.7,-77.8Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
+                            <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
+                                <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                                    <div class="flex items-center mb-6">
+                                        <div class="icon-box">
+                                            <span>🎬</span>
+                                        </div>
+                                        <h3 class="text-2xl md:text-3xl font-bold">EL PODER DE LA ECONOMÍA POPULAR Y SOLIDARIA</h3>
+                                    </div>
+                                    
+                                    <div class="flex items-center mb-4">
+                                        <span class="tag">📌 Guión y producción</span>
+                                    </div>
+                                    
+                                    <div class="glass-card p-6 mb-8">
+                                        <p class="text-lg">Serie audiovisual que visibiliza experiencias organizativas y productivas de la economía popular en clave de soberanía, trabajo y comunidad.</p>
+                                    </div>
+                                    
+                                    <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openYoutubeInNewTab('https://youtu.be/64e3EK55jOE?si=b9C85yEAjC7pTyPN')">
+                                        <span class="mr-2">🎥</span> Ver más
+                                    </button>
+                                </div>
+                                
+                                <div class="w-full md:w-1/2">
+                                    <div class="video-container" id="video-container-1">
+                                        <div id="youtube-player-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide h-full bg-almacen" data-slide-index="1">
+                            <div class="slide-bg">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M47.7,-79.1C62.9,-71.9,77,-60.9,84.6,-46.4C92.3,-31.8,93.5,-13.6,90.1,3.4C86.8,20.4,78.9,36.2,68.2,49.7C57.4,63.2,43.8,74.3,28.5,79.9C13.2,85.5,-3.9,85.6,-19.7,80.9C-35.6,76.3,-50.2,67,-62.1,54.5C-74,42,-83.2,26.4,-87.6,8.6C-92,-9.2,-91.6,-29.1,-83.2,-44.9C-74.8,-60.7,-58.4,-72.3,-41.9,-78.8C-25.4,-85.3,-8.8,-86.7,6.9,-87.7C22.5,-88.7,45.1,-89.3,47.7,-79.1Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
+                            <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
+                                <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                                    <div class="flex items-center mb-6">
+                                        <div class="icon-box">
+                                            <span>🛒</span>
+                                        </div>
+                                        <h3 class="text-2xl md:text-3xl font-bold">INAUGURACIÓN NUEVO ALMACÉN DE ALIMENTOS COOPERATIVOS</h3>
+                                    </div>
+                                    
+                                    <div class="flex items-center mb-4">
+                                        <span class="tag">📌 Realización</span>
+                                    </div>
+                                    
+                                    <div class="glass-card p-6 mb-8">
+                                        <p class="text-lg">Cobertura integral del evento de apertura del nuevo almacén cooperativo en CABA. Registro audiovisual con entrevistas, ambiente y puesta en escena del proyecto.</p>
+                                    </div>
+                                    
+                                    <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openYoutubeInNewTab('https://youtu.be/h2ZX7HWpH-0?si=t5P3_4xiY9rh_yHo')">
+                                        <span class="mr-2">🎥</span> Ver más
+                                    </button>
+                                </div>
+                                
+                                <div class="w-full md:w-1/2">
+                                    <div class="video-container" id="video-container-2">
+                                        <div id="youtube-player-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide h-full bg-podcast" data-slide-index="2">
+                            <div class="slide-bg">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M38.5,-66.2C51.9,-59.3,66.2,-52.1,75.7,-40.1C85.2,-28.1,89.9,-11.3,88.8,5.2C87.7,21.7,80.8,37.9,70.3,51.5C59.8,65.1,45.6,76.1,29.8,81.6C14,87.1,-3.5,87.1,-19.6,82.3C-35.7,77.5,-50.5,67.9,-62.2,55C-73.9,42.1,-82.5,25.9,-85.2,8.3C-87.9,-9.3,-84.7,-28.3,-75.3,-43.1C-65.9,-57.9,-50.3,-68.5,-35,-73.3C-19.7,-78.1,-4.9,-77.1,8.2,-72.1C21.3,-67.1,42.6,-58.1,38.5,-66.2Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
+                            <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
+                                <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                                    <div class="flex items-center mb-6">
+                                        <div class="icon-box">
+                                            <span>🎙️</span>
+                                        </div>
+                                        <h3 class="text-2xl md:text-3xl font-bold">SOBERANÍA PARLANTE – PODCAST</h3>
+                                    </div>
+                                    
+                                    <div class="flex items-center mb-4">
+                                        <span class="tag">📌 Producción</span>
+                                    </div>
+                                    
+                                    <div class="glass-card p-6 mb-8">
+                                        <p class="text-lg">Podcast dedicado a reflexionar sobre soberanía alimentaria, comunicación popular y políticas públicas con voces del territorio.</p>
+                                    </div>
+                                    
+                                    <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openSpotifyInNewTab('https://open.spotify.com/show/3FpQdnt5Cly1z5AOcmJCuh')">
+                                        <span class="mr-2">🎧</span> Escuchar
+                                    </button>
+                                </div>
+                                
+                                <div class="w-full md:w-1/2">
+                                    <div class="custom-embed" id="spotify-container">
+                                        <div id="spotify-player"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="slide h-full bg-reels" data-slide-index="3">
+                            <div class="slide-bg">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M44.2,-76.3C58.4,-69.2,71.9,-59.3,79.8,-45.8C87.7,-32.3,90,-15.1,88.6,1.4C87.2,17.9,82.1,33.8,73.2,47.4C64.3,61,51.6,72.3,37,79.1C22.4,85.9,5.9,88.2,-10.2,86.6C-26.3,85,-42,79.5,-54.8,70C-67.6,60.5,-77.5,47,-83.3,31.8C-89.1,16.6,-90.8,-0.3,-87.2,-15.8C-83.6,-31.3,-74.7,-45.3,-62.6,-56.1C-50.5,-66.9,-35.2,-74.5,-19.9,-77.7C-4.6,-80.9,10.8,-79.8,25.9,-77.1C41,-74.4,55.9,-70.1,44.2,-76.3Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
+                            <div class="slide-content h-full flex flex-col md:flex-row items-center p-8 md:p-16">
+                                <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                                    <div class="flex items-center mb-6">
+                                        <div class="icon-box">
+                                            <span>📲</span>
+                                        </div>
+                                        <h3 class="text-2xl md:text-3xl font-bold">REELS DE ALIMENTOS COOPERATIVOS</h3>
+                                    </div>
+                                    
+                                    <div class="flex items-center mb-4">
+                                        <span class="tag">📌 Realización</span>
+                                    </div>
+                                    
+                                    <div class="glass-card p-6 mb-8">
+                                        <p class="text-lg">Producción de contenido audiovisual breve y potente para redes sociales, centrado en productos, actividades y valores de la red Alimentos Cooperativos.</p>
+                                    </div>
+                                    
+                                    <button class="btn inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full text-lg font-medium hover:bg-gray-100 transition" onclick="openInstagramInNewTab('https://www.instagram.com/reel/DAb2ObEO3Rq/')">
+                                        <span class="mr-2">📱</span> Ver más
+                                    </button>
+                                </div>
+                                
+                                <div class="w-full md:w-1/2">
+                                    <div class="instagram-container">
+                                        <div class="instagram-placeholder" onclick="openInstagramInNewTab('https://www.instagram.com/reel/DAb2ObEO3Rq/')">
+                                            <i class="fab fa-instagram"></i>
+                                            <h3 class="text-xl font-bold mb-2">Reels de Alimentos Cooperativos</h3>
+                                            <p class="mb-4">Haz clic para ver en Instagram</p>
+                                            <button class="px-6 py-2 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition">Ver en Instagram</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide Controls -->
+                    <div class="absolute bottom-8 left-0 right-0 flex justify-center items-center space-x-4 z-10">
+                        <button id="prevSlide" class="w-12 h-12 rounded-full bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition">
+                            <i class="fas fa-chevron-left text-white"></i>
+                        </button>
+                        
+                        <div class="progress-bar w-32 md:w-64">
+                            <div class="progress" style="width: 25%"></div>
+                        </div>
+                        
+                        <button id="nextSlide" class="w-12 h-12 rounded-full bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition">
+                            <i class="fas fa-chevron-right text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        // Header background on scroll
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('bg-gray-900', 'shadow-lg');
-        } else {
-            header.classList.remove('bg-gray-900', 'shadow-lg');
+        <!-- Otros Proyectos -->
+        <section id="otros" class="py-20 px-4 md:px-8 bg-gray-900">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Otros Proyectos</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal" style="animation-delay: 0.2s">
+                    <!-- Proyecto 1 -->
+                    <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('economias')">
+                        <div class="absolute inset-0 bg-economia-card"></div>
+                        <div class="project-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
+                            <h3 class="text-2xl font-bold mb-2">ECONOMÍAS REGIONALES</h3>
+                            <p class="text-white text-opacity-80 mb-4">📌 Producción y realización</p>
+                            <div class="card-overlay">
+                                <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
+                                    <span class="mr-2">🎥</span> Ver detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 2 -->
+                    <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('calma')">
+                        <div class="absolute inset-0 bg-calma-card"></div>
+                        <div class="project-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
+                            <h3 class="text-2xl font-bold mb-2">CALMA</h3>
+                            <p class="text-white text-opacity-80 mb-4">📌 Branding</p>
+                            <div class="card-overlay">
+                                <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
+                                    <span class="mr-2">🕯️</span> Ver detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 3 -->
+                    <div class="project-card rounded-xl overflow-hidden h-80 relative cursor-pointer" onclick="openModal('ninez')">
+                        <div class="absolute inset-0 bg-ninez-card"></div>
+                        <div class="project-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-6 card-content">
+                            <h3 class="text-2xl font-bold mb-2">DESARROLLO SOCIAL – NIÑEZ</h3>
+                            <p class="text-white text-opacity-80 mb-4">📌 Producción</p>
+                            <div class="card-overlay">
+                                <button class="px-6 py-3 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition flex items-center">
+                                    <span class="mr-2">👶</span> Ver detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contacto" class="py-20 px-4 md:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center reveal section-title">Contacto</h2>
+                
+                <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 reveal" style="animation-delay: 0.2s">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                            <h3 class="text-2xl font-bold mb-4">¿Interesado en trabajar juntos?</h3>
+                            <p class="text-gray-300 mb-6">Estoy disponible para nuevos proyectos de comunicación digital y creación de contenidos. Contáctame para discutir cómo puedo ayudarte.</p>
+                            
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <a href="mailto:mglimas@gmail.com" class="text-white hover:text-pink-400 transition">mglimas@gmail.com</a>
+                            </div>
+                            
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <span>11 5489 5992</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <span>CABA, Argentina</span>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full md:w-1/2">
+                            <div class="flex justify-center mb-6">
+                                <button class="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition" onclick="openLinkedInInNewTab('https://www.linkedin.com/in/mauro-limas/')">
+                                    <i class="fab fa-linkedin-in text-white"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="glass-card p-6">
+                                <p class="text-center text-lg mb-4">¿Listo para comenzar un proyecto?</p>
+                                <a href="mailto:mglimas@gmail.com" class="block w-full btn bg-gradient-to-r from-pink-500 to-purple-500 text-white py-3 rounded-full hover:shadow-lg transition text-center">
+                                    Enviar mensaje
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="py-12 px-4 md:px-8 border-t border-gray-800" id="footer">
+            <div class="container mx-auto">
+                <div class="footer-content">
+                    <div class="footer-links">
+                        <a href="#hero" class="text-white hover:text-pink-400 transition">Inicio</a>
+                        <a href="#proyectos" class="text-white hover:text-pink-400 transition">Proyectos</a>
+                        <a href="#otros" class="text-white hover:text-pink-400 transition">Otros Trabajos</a>
+                        <a href="#contacto" class="text-white hover:text-pink-400 transition">Contacto</a>
+                    </div>
+                    
+                    <div class="footer-email">
+                        <a href="mailto:mglimas@gmail.com">mglimas@gmail.com</a>
+                    </div>
+                    
+                    <div class="footer-copyright">
+                        <p>© 2025 Mauro Limas. Todos los derechos reservados.</p>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button id="backToTop" class="px-4 py-2 rounded-full bg-white bg-opacity-10 text-white hover:bg-opacity-20 transition flex items-center">
+                            <i class="fas fa-arrow-up mr-2"></i> Volver arriba
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Modals -->
+        <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-80 backdrop-filter backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div id="modalContent" class="modal bg-gray-900 rounded-2xl shadow-2xl max-w-lg w-full p-8 relative">
+                <button id="closeModal" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition">
+                    <i class="fas fa-times text-white"></i>
+                </button>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // Variables para los reproductores de YouTube
+        let youtubePlayer1 = null;
+        let youtubePlayer2 = null;
+        let spotifyPlayer = null;
+        let currentSlideIndex = 0;
+        let playersReady = false;
+        
+        // Loader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loader').classList.add('hidden');
+                initializePlayers();
+            }, 1000);
+        });
+        
+        // Inicializar reproductores
+        function initializePlayers() {
+            // Crear el reproductor de Spotify
+            createSpotifyPlayer();
+            
+            // Los reproductores de YouTube se inicializan con la API de YouTube
+            if (typeof YT !== 'undefined' && YT.Player) {
+                createYoutubePlayers();
+            }
         }
-    });
-    
-    // YouTube API Ready
-    window.onYouTubeIframeAPIReady = function() {
-        // Inicializar los reproductores de YouTube
-        youtubePlayer1 = new YT.Player('youtube-frame-1', {
-            events: {
-                'onReady': onPlayerReady
+        
+        // Crear reproductores de YouTube
+        function createYoutubePlayers() {
+            // Reproductor 1
+            youtubePlayer1 = new YT.Player('youtube-player-1', {
+                height: '100%',
+                width: '100%',
+                videoId: '64e3EK55jOE',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'rel': 0,
+                    'fs': 1,
+                    'modestbranding': 1,
+                    'enablejsapi': 1,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+            
+            // Reproductor 2
+            youtubePlayer2 = new YT.Player('youtube-player-2', {
+                height: '100%',
+                width: '100%',
+                videoId: 'h2ZX7HWpH-0',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'rel': 0,
+                    'fs': 1,
+                    'modestbranding': 1,
+                    'enablejsapi': 1,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+            
+            playersReady = true;
+        }
+        
+        // Crear reproductor de Spotify
+        function createSpotifyPlayer() {
+            const spotifyContainer = document.getElementById('spotify-player');
+            
+            // Crear un elemento para el reproductor de Spotify
+            const spotifyIframe = document.createElement('iframe');
+            spotifyIframe.id = 'spotify-iframe';
+            spotifyIframe.style.position = 'absolute';
+            spotifyIframe.style.top = '0';
+            spotifyIframe.style.left = '0';
+            spotifyIframe.style.width = '100%';
+            spotifyIframe.style.height = '100%';
+            spotifyIframe.style.border = 'none';
+            spotifyIframe.style.borderRadius = '1rem';
+            spotifyIframe.src = "https://open.spotify.com/embed/show/3FpQdnt5Cly1z5AOcmJCuh?utm_source=generator";
+            spotifyIframe.allowFullscreen = true;
+            spotifyIframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+            spotifyIframe.loading = "lazy";
+            
+            // Agregar el iframe al contenedor
+            spotifyContainer.appendChild(spotifyIframe);
+            
+            // Guardar referencia al iframe
+            spotifyPlayer = spotifyIframe;
+        }
+        
+        // Evento cuando un reproductor de YouTube está listo
+        function onPlayerReady(event) {
+            // El reproductor está listo
+            console.log("YouTube player ready");
+        }
+        
+        // Evento cuando cambia el estado de un reproductor de YouTube
+        function onPlayerStateChange(event) {
+            // Si el video comienza a reproducirse, pausar otros medios
+            if (event.data === YT.PlayerState.PLAYING) {
+                // Pausar otros medios excepto el que está reproduciendo
+                if (event.target === youtubePlayer1) {
+                    if (youtubePlayer2 && typeof youtubePlayer2.pauseVideo === 'function') {
+                        youtubePlayer2.pauseVideo();
+                    }
+                    pauseSpotify();
+                } else if (event.target === youtubePlayer2) {
+                    if (youtubePlayer1 && typeof youtubePlayer1.pauseVideo === 'function') {
+                        youtubePlayer1.pauseVideo();
+                    }
+                    pauseSpotify();
+                }
+            }
+        }
+        
+        // Función para pausar todos los medios
+        function pauseAllMedia() {
+            // Pausar videos de YouTube
+            pauseYouTube();
+            
+            // Pausar Spotify
+            pauseSpotify();
+        }
+        
+        // Función para pausar YouTube
+        function pauseYouTube() {
+            if (youtubePlayer1 && typeof youtubePlayer1.pauseVideo === 'function') {
+                youtubePlayer1.pauseVideo();
+            }
+            
+            if (youtubePlayer2 && typeof youtubePlayer2.pauseVideo === 'function') {
+                youtubePlayer2.pauseVideo();
+            }
+        }
+        
+        // Función para pausar Spotify
+        function pauseSpotify() {
+            if (spotifyPlayer) {
+                // La única forma de "pausar" Spotify es recargar el iframe
+                const currentSrc = spotifyPlayer.src;
+                spotifyPlayer.src = currentSrc;
+            }
+        }
+        
+        // YouTube API Ready
+        window.onYouTubeIframeAPIReady = function() {
+            createYoutubePlayers();
+        };
+        
+        // Scroll progress indicator
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        window.addEventListener('scroll', function() {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollIndicator.style.width = scrolled + '%';
+            
+            // Header background on scroll
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-gray-900', 'shadow-lg');
+            } else {
+                header.classList.remove('bg-gray-900', 'shadow-lg');
             }
         });
         
-        youtubePlayer2 = new YT.Player('youtube-frame-2', {
-            events: {
-                'onReady': onPlayerReady
+        // Slide functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.querySelector('.progress');
+        
+        function showSlide(index) {
+            // Pausar todos los medios antes de cambiar de slide
+            pauseAllMedia();
+            
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
             }
+            
+            // Show the current slide
+            slides[index].classList.add('active');
+            currentSlideIndex = index;
+            
+            // Update progress bar
+            const progressWidth = ((index + 1) / totalSlides) * 100;
+            progressBar.style.width = progressWidth + '%';
+        }
+        
+        document.getElementById('nextSlide').addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
         });
-    };
-    
-    function onPlayerReady(event) {
-        // El reproductor está listo
-    }
-    
-    // Función para pausar todos los medios
-    function pauseAllMedia() {
-        // Pausar videos de YouTube
-        if (youtubePlayer1 && typeof youtubePlayer1.pauseVideo === 'function') {
-            youtubePlayer1.pauseVideo();
-        }
         
-        if (youtubePlayer2 && typeof youtubePlayer2.pauseVideo === 'function') {
-            youtubePlayer2.pauseVideo();
-        }
+        document.getElementById('prevSlide').addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        });
         
-        // Pausar Spotify (recargar el iframe para detener la reproducción)
-        const spotifyFrame = document.getElementById('spotify-frame');
-        if (spotifyFrame) {
-            const currentSrc = spotifyFrame.src;
-            spotifyFrame.src = currentSrc;
-        }
-    }
-    
-    // Slide functionality
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const progressBar = document.querySelector('.progress');
-    
-    function showSlide(index) {
-        // Pausar todos los medios antes de cambiar de slide
-        pauseAllMedia();
-        
-        // Hide all slides
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].classList.remove('active');
-        }
-        
-        // Show the current slide
-        slides[index].classList.add('active');
-        currentSlideIndex = index;
-        
-        // Update progress bar
-        const progressWidth = ((index + 1) / totalSlides) * 100;
-        progressBar.style.width = progressWidth + '%';
-    }
-    
-    document.getElementById('nextSlide').addEventListener('click', function() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        showSlide(currentSlide);
-    });
-    
-    document.getElementById('prevSlide').addEventListener('click', function() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(currentSlide);
-    });
-    
-    // Auto-advance slides every 8 seconds
-    let slideInterval = setInterval(function() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        showSlide(currentSlide);
-    }, 8000);
-    
-    // Pause auto-advance when user interacts with slides
-    document.querySelector('.slides-container').addEventListener('mouseenter', function() {
-        clearInterval(slideInterval);
-    });
-    
-    document.querySelector('.slides-container').addEventListener('mouseleave', function() {
-        slideInterval = setInterval(function() {
+        // Auto-advance slides every 8 seconds
+        let slideInterval = setInterval(function() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
         }, 8000);
-    });
-    
-    // Modal functionality
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalContent = document.getElementById('modalContent');
-    const modalBody = document.getElementById('modalBody');
-    const closeModal = document.getElementById('closeModal');
-    
-    function openModal(projectId) {
-        // Pausar todos los medios antes de abrir el modal
-        pauseAllMedia();
         
-        let content = '';
+        // Pause auto-advance when user interacts with slides
+        document.querySelector('.slides-container').addEventListener('mouseenter', function() {
+            clearInterval(slideInterval);
+        });
         
-        if (projectId === 'economias') {
-            content = `
-                <div class="text-center mb-6">
-                    <div class="w-16 h-16 mx-auto bg-green-500 rounded-xl flex items-center justify-center text-2xl mb-4">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mt-4">ECONOMÍAS REGIONALES</h3>
-                    <p class="text-gray-400 mt-2">📌 Producción y realización</p>
-                </div>
-                <div class="glass-card p-6 mb-6">
-                    <p class="text-lg">Proyecto de visibilización de economías regionales a través de contenido audiovisual. Incluye entrevistas a productores locales y documentación de procesos productivos sustentables.</p>
-                </div>
-                <div class="flex justify-center">
-                    <button class="btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openYoutubeInNewTab('https://youtu.be/uWpSm4v0fOA?si=86qUs7lFAbNCLqIw')">
-                        <span class="mr-2">🎥</span> Ver proyecto completo
-                    </button>
-                </div>
-            `;
-        } else if (projectId === 'calma') {
-            content = `
-                <div class="text-center mb-6">
-                    <div class="w-16 h-16 mx-auto bg-purple-500 rounded-xl flex items-center justify-center text-2xl mb-4">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mt-4">CALMA</h3>
-                    <p class="text-gray-400 mt-2">📌 Branding</p>
-                </div>
-                <div class="glass-card p-6 mb-6">
-                    <p class="text-lg">Desarrollo integral de identidad visual para marca de velas artesanales. El proyecto incluyó diseño de logo, paleta de colores, tipografía, packaging y estrategia de comunicación visual para redes sociales.</p>
-                </div>
-                <div class="flex justify-center">
-                    <button class="btn px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openInstagramInNewTab('https://www.instagram.com/calmacandles___?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
-                        <span class="mr-2">🕯️</span> Ver proyecto completo
-                    </button>
-                </div>
-            `;
-        } else if (projectId === 'ninez') {
-            content = `
-                <div class="text-center mb-6">
-                    <div class="w-16 h-16 mx-auto bg-blue-500 rounded-xl flex items-center justify-center text-2xl mb-4">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mt-4">DESARROLLO SOCIAL – NIÑEZ</h3>
-                    <p class="text-gray-400 mt-2">📌 Producción</p>
-                </div>
-                <div class="glass-card p-6 mb-6">
-                    <p class="text-lg">Producción de contenidos educativos y de concientización sobre derechos de la niñez. Incluye materiales audiovisuales, gráficos y campañas de difusión.</p>
-                </div>
-                <div class="flex justify-center">
-                    <button class="btn px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openInstagramInNewTab('https://www.instagram.com/mincaphum_ar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
-                        <span class="mr-2">👶</span> Ver proyecto completo
-                    </button>
-                </div>
-            `;
-        }
+        document.querySelector('.slides-container').addEventListener('mouseleave', function() {
+            slideInterval = setInterval(function() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 8000);
+        });
         
-        modalBody.innerHTML = content;
-        modalOverlay.classList.remove('hidden');
+        // Modal functionality
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.getElementById('closeModal');
         
-        // Animation
-        setTimeout(function() {
-            modalContent.classList.add('active');
-        }, 10);
-    }
-    
-    closeModal.addEventListener('click', function() {
-        modalContent.classList.remove('active');
-        
-        setTimeout(function() {
-            modalOverlay.classList.add('hidden');
-        }, 500);
-    });
-    
-    // Close modal when clicking outside
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-            closeModal.click();
-        }
-    });
-    
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Pausar todos los medios al navegar a otra sección
+        function openModal(projectId) {
+            // Pausar todos los medios antes de abrir el modal
             pauseAllMedia();
             
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            let content = '';
+            
+            if (projectId === 'economias') {
+                content = `
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto bg-green-500 rounded-xl flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mt-4">ECONOMÍAS REGIONALES</h3>
+                        <p class="text-gray-400 mt-2">📌 Producción y realización</p>
+                    </div>
+                    <div class="glass-card p-6 mb-6">
+                        <p class="text-lg">Proyecto de visibilización de economías regionales a través de contenido audiovisual. Incluye entrevistas a productores locales y documentación de procesos productivos sustentables.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="btn px-6 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openYoutubeInNewTab('https://youtu.be/uWpSm4v0fOA?si=86qUs7lFAbNCLqIw')">
+                            <span class="mr-2">🎥</span> Ver proyecto completo
+                        </button>
+                    </div>
+                `;
+            } else if (projectId === 'calma') {
+                content = `
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto bg-purple-500 rounded-xl flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mt-4">CALMA</h3>
+                        <p class="text-gray-400 mt-2">📌 Branding</p>
+                    </div>
+                    <div class="glass-card p-6 mb-6">
+                        <p class="text-lg">Desarrollo integral de identidad visual para marca de velas artesanales. El proyecto incluyó diseño de logo, paleta de colores, tipografía, packaging y estrategia de comunicación visual para redes sociales.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="btn px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openInstagramInNewTab('https://www.instagram.com/calmacandles___?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
+                            <span class="mr-2">🕯️</span> Ver proyecto completo
+                        </button>
+                    </div>
+                `;
+            } else if (projectId === 'ninez') {
+                content = `
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto bg-blue-500 rounded-xl flex items-center justify-center text-2xl mb-4">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mt-4">DESARROLLO SOCIAL – NIÑEZ</h3>
+                        <p class="text-gray-400 mt-2">📌 Producción</p>
+                    </div>
+                    <div class="glass-card p-6 mb-6">
+                        <p class="text-lg">Producción de contenidos educativos y de concientización sobre derechos de la niñez. Incluye materiales audiovisuales, gráficos y campañas de difusión.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="btn px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-full hover:shadow-lg transition flex items-center" onclick="openInstagramInNewTab('https://www.instagram.com/mincaphum_ar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
+                            <span class="mr-2">👶</span> Ver proyecto completo
+                        </button>
+                    </div>
+                `;
+            }
+            
+            modalBody.innerHTML = content;
+            modalOverlay.classList.remove('hidden');
+            
+            // Animation
+            setTimeout(function() {
+                modalContent.classList.add('active');
+            }, 10);
+        }
+        
+        closeModal.addEventListener('click', function() {
+            modalContent.classList.remove('active');
+            
+            setTimeout(function() {
+                modalOverlay.classList.add('hidden');
+            }, 500);
+        });
+        
+        // Close modal when clicking outside
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal.click();
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Pausar todos los medios al navegar a otra sección
+                pauseAllMedia();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', function() {
+            // Pausar todos los medios al volver arriba
+            pauseAllMedia();
             
             window.scrollTo({
-                top: targetElement.offsetTop - 80,
+                top: 0,
                 behavior: 'smooth'
             });
         });
-    });
-    
-    // Back to top button
-    document.getElementById('backToTop').addEventListener('click', function() {
-        // Pausar todos los medios al volver arriba
-        pauseAllMedia();
         
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Reveal animations on scroll
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    function checkReveal() {
-        const windowHeight = window.innerHeight;
-        const revealPoint = 150;
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
         
-        for (let i = 0; i < revealElements.length; i++) {
-            const element = revealElements[i];
-            const revealTop = element.getBoundingClientRect().top;
+        function checkReveal() {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 150;
             
-            if (revealTop < windowHeight - revealPoint) {
-                element.classList.add('active');
+            for (let i = 0; i < revealElements.length; i++) {
+                const element = revealElements[i];
+                const revealTop = element.getBoundingClientRect().top;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
             }
         }
-    }
-    
-    window.addEventListener('scroll', checkReveal);
-    window.addEventListener('load', checkReveal);
-    
-    // Download functionality
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-        // Create a blob with the HTML content
-        const htmlContent = document.documentElement.outerHTML;
-        const blob = new Blob([htmlContent], {type: 'text/html'});
-        const url = URL.createObjectURL(blob);
         
-        // Create a temporary link and trigger download
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'mauro-limas-portfolio.html';
-        document.body.appendChild(a);
-        a.click();
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('load', checkReveal);
         
-        // Clean up
-        setTimeout(function() {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }, 100);
-    });
-    
-    // Funciones para abrir enlaces en nuevas pestañas
-    function openYoutubeInNewTab(url) {
-        // Pausar todos los medios antes de abrir un enlace
-        pauseAllMedia();
-        window.open(url, '_blank');
-    }
-    
-    function openSpotifyInNewTab(url) {
-        // Pausar todos los medios antes de abrir un enlace
-        pauseAllMedia();
-        window.open(url, '_blank');
-    }
-    
-    function openInstagramInNewTab(url) {
-        // Pausar todos los medios antes de abrir un enlace
-        pauseAllMedia();
-        window.open(url, '_blank');
-    }
-    
-    function openLinkedInInNewTab(url) {
-        // Pausar todos los medios antes de abrir un enlace
-        pauseAllMedia();
-        window.open(url, '_blank');
-    }
-    
-    // Pausar medios cuando el usuario cambia de pestaña o minimiza la ventana
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
+        // Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Create a blob with the HTML content
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            
+            // Create a temporary link and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mauro-limas-portfolio.html';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(function() {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+        
+        // Funciones para abrir enlaces en nuevas pestañas
+        function openYoutubeInNewTab(url) {
+            // Pausar todos los medios antes de abrir un enlace
             pauseAllMedia();
+            window.open(url, '_blank');
         }
-    });
-</script>
-
+        
+        function openSpotifyInNewTab(url) {
+            // Pausar todos los medios antes de abrir un enlace
+            pauseAllMedia();
+            window.open(url, '_blank');
+        }
+        
+        function openInstagramInNewTab(url) {
+            // Pausar todos los medios antes de abrir un enlace
+            pauseAllMedia();
+            window.open(url, '_blank');
+        }
+        
+        function openLinkedInInNewTab(url) {
+            // Pausar todos los medios antes de abrir un enlace
+            pauseAllMedia();
+            window.open(url, '_blank');
+        }
+        
+        // Pausar medios cuando el usuario cambia de pestaña o minimiza la ventana
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                pauseAllMedia();
+            }
+        });
+        
+        // Asegurarse de que los reproductores se detengan cuando se cambia de sección
+        window.addEventListener('hashchange', function() {
+            pauseAllMedia();
+        });
+        
+        // Manejar clics en cualquier parte del documento para asegurarse de que los reproductores se detengan cuando sea necesario
+        document.addEventListener('click', function(e) {
+            // Si el clic no fue dentro de un reproductor, pausar todos los medios
+            const isVideoClick = e.target.closest('.video-container') !== null;
+            const isSpotifyClick = e.target.closest('.custom-embed') !== null;
+            
+            if (!isVideoClick && !isSpotifyClick) {
+                pauseAllMedia();
+            }
+        });
+    </script>
+</body>
+</html>
