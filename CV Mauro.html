@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Mauro Limas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+body {
+        font-family: 'Roboto', sans-serif;
+        background-color: white;
+        color: #333;
+        line-height: 1.5;
+    }
+    
+    h1, h2, h3 {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Configuración para formato A4 */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    
+    .cv-container {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background-color: white;
+        position: relative;
+    }
+    
+    .page {
+        page-break-after: always;
+        position: relative;
+        padding: 20mm 15mm;
+    }
+    
+    .page:last-child {
+        page-break-after: avoid;
+    }
+    
+    .print-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    .left-column {
+        background-color: #f8fafc;
+        border-right: 1px solid #e2e8f0;
+        padding: 20px;
+    }
+    
+    .section-title {
+        position: relative;
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .section-title:before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-color: #3b82f6;
+        margin-right: 8px;
+    }
+    
+    .section-title:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #e2e8f0;
+    }
+    
+    .timeline-item {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 20px;
+        border-left: 2px solid #e2e8f0;
+    }
+    
+    .timeline-item:hover {
+        border-left: 2px solid #3b82f6;
+    }
+    
+    .header-accent {
+        height: 8px;
+        background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+    }
+    
+    .aptitude-tag {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 4px;
+        background-color: #f1f5f9;
+        border-radius: 2px;
+        transition: all 0.2s ease;
+    }
+    
+    .aptitude-tag:hover {
+        background-color: #e0f2fe;
+        transform: translateX(2px);
+    }
+    
+    .language-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: #f1f5f9;
+        padding: 8px 12px;
+        border-radius: 2px;
+        margin-top: 8px;
+        width: 100%;
+    }
+    
+    .publication-item {
+        padding: 8px;
+        margin-bottom: 12px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
+    }
+    
+    .publication-item:hover {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+    }
+    
+    .contact-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        color: #3b82f6;
+    }
+    
+    @media print {
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        
+        .cv-container {
+            width: 100%;
+            height: 100%;
+            box-shadow: none;
+            margin: 0;
+        }
+        
+        .print-button {
+            display: none;
+        }
+        
+        .page {
+            page-break-after: always;
+        }
+    }
+    </style>
+</head>
+<body>
+<div class="cv-container shadow-xl mx-auto my-8">
+    <!-- Página 1 -->
+    <div class="page">
+        <!-- Barra de acento superior -->
+        <div class="header-accent"></div>
+        
+        <!-- Encabezado -->
+        <div class="py-6 border-b border-gray-200 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">MAURO LIMAS</h1>
+                    <h2 class="text-xl text-blue-600 mt-1">Comunicación Institucional</h2>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="text-sm text-gray-600 flex flex-col space-y-1">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span>CABA, Argentina</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span>mglimas@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span>(011) 15-5489-5992</span>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <a href="https://linkedin.com/in/mauro-limas/" target="_blank" class="text-blue-600 hover:underline">linkedin.com/in/mauro-limas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenido principal en dos columnas -->
+        <div class="flex flex-col md:flex-row">
+            <!-- Columna izquierda -->
+            <div class="w-full md:w-1/3 left-column">
+                <!-- Perfil -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        PERFIL
+                    </h2>
+                    <p class="text-sm text-gray-700">
+                        Profesional con trayectoria en el diseño e implementación de estrategias institucionales en empresas, organizaciones sociales y organismos públicos. Especializado en gestión y comunicación de proyectos, con experiencia en procesos de fortalecimiento de la cultura organizacional y la articulación institucional.
+                    </p>
+                </div>
+                
+                <!-- Aptitudes -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        APTITUDES
+                    </h2>
+                    <div class="flex flex-wrap">
+                        <div class="aptitude-tag text-sm text-gray-700">Comunicación institucional</div>
+                        <div class="aptitude-tag text-sm text-gray-700">Coordinación de equipos</div>
+                        <div class="aptitude-tag text-sm text-gray-700">Branding y Marketing digital</div>
+                        <div class="aptitude-tag text-sm text-gray-700">Identidad organizacional</div>
+                        <div class="aptitude-tag text-sm text-gray-700">Análisis de datos</div>
+                        <div class="aptitude-tag text-sm text-gray-700">Resolución de conflictos</div>
+                    </div>
+                </div>
+                
+                <!-- Idiomas -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        IDIOMAS
+                    </h2>
+                    <div class="language-badge">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="text-gray-700 font-medium">Inglés</span>
+                            <span class="text-blue-600 text-sm">Intermedio B2</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Herramientas -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        HERRAMIENTAS
+                    </h2>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Office</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Google Suite</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Diseño gráfico</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Audiovisual</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">UX/UI</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">E-learning</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Análisis datos</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">Redes sociales</div>
+                        <div class="bg-gray-100 px-3 py-2 rounded text-sm text-gray-700">IA</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Columna derecha -->
+            <div class="w-full md:w-2/3 pl-0 md:pl-8 space-y-8">
+                <!-- Formación Académica -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        FORMACIÓN ACADÉMICA
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800">Maestría en Ciencias Sociales y Humanidades</h3>
+                                    <p class="text-sm text-gray-600">Universidad Nacional de Quilmes (UNQ)</p>
+                                </div>
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded">En curso</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800">Diplomatura en Políticas Públicas Sociales</h3>
+                                    <p class="text-sm text-gray-600">Universidad Nacional de Buenos Aires (UNaB)</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800">Profesor en Ciencias de la Comunicación</h3>
+                                    <p class="text-sm text-gray-600">Universidad de Buenos Aires (UBA)</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2008</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-base font-semibold text-gray-800">Licenciado en Ciencias de la Comunicación</h3>
+                                    <p class="text-sm text-gray-600">Universidad de Buenos Aires (UBA)</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2004</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experiencia Profesional -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        EXPERIENCIA PROFESIONAL
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base font-semibold text-gray-800">Ministerio de Capital Humano de la Nación</h3>
+                                <span class="text-sm text-blue-600 font-medium">2023 - Actual</span>
+                            </div>
+                            <p class="text-sm text-gray-600 italic mb-2">Especialista en comunicación de la Dirección General de Prensa y Comunicación</p>
+                            <ul class="text-sm text-gray-700 list-disc pl-5">
+                                <li>Producción y realización de campañas de comunicación</li>
+                                <li>Prensa y periodismo</li>
+                                <li>Redacción de gacetillas e informes</li>
+                                <li>Producción de Newsletter</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base font-semibold text-gray-800">Huvaití Comunicación</h3>
+                                <span class="text-sm text-blue-600 font-medium">2016 - Actual</span>
+                            </div>
+                            <p class="text-sm text-gray-600 italic mb-2">Coordinador de proyectos. Fundador y Secretario de la organización</p>
+                            <ul class="text-sm text-gray-700 list-disc pl-5">
+                                <li>Gestión de proyectos para el desarrollo de experiencias de innovación social</li>
+                                <li>Planificación de estrategias institucionales para organizaciones sociales</li>
+                                <li>Diseño y realización de campañas de comunicación</li>
+                                <li>Organización de eventos locales y nacionales</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base font-semibold text-gray-800">Ministerio de Desarrollo Social de la Nación</h3>
+                                <span class="text-sm text-blue-600 font-medium">2007 - 2023</span>
+                            </div>
+                            <p class="text-sm text-gray-600 italic mb-2">Coordinador de comunicación institucional. Dirección General de Comunicación Institucional (2022-2023)</p>
+                            <ul class="text-sm text-gray-700 list-disc pl-5">
+                                <li>Desarrollo de la comunicación y cultura institucional</li>
+                                <li>Coordinación de capacitaciones, proyectos editoriales y relaciones con instituciones académicas</li>
+                                <li>Organización de eventos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experiencia Docente -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        EXPERIENCIA DOCENTE
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base font-semibold text-gray-800">Universidad Nacional de Quilmes</h3>
+                                <span class="text-sm text-blue-600 font-medium">2012 - Actual</span>
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Profesor e investigador del Área de Economía Social y Solidaria del Departamento de Economía, en carreras de grado, posgrado y proyectos sobre Agricultura Sostenible, Economía Solidaria y Comunicación.
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-base font-semibold text-gray-800">Instituto Católico de Estudios Sociales</h3>
+                                <span class="text-sm text-blue-600 font-medium">2018 - Actual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Página 2 -->
+    <div class="page">
+        <!-- Barra de acento superior -->
+        <div class="header-accent"></div>
+        
+        <div class="flex flex-col md:flex-row mt-8">
+            <!-- Columna izquierda -->
+            <div class="w-full md:w-1/3 left-column">
+                <!-- Publicaciones -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        PUBLICACIONES
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">Coordinación general de la serie "Las políticas sociales en perspectiva. Resultados y desafíos"</p>
+                            <p class="text-xs text-blue-600">MDS, 2023</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">"Por un futuro en común. Diálogos sobre economía cooperativa, popular, social y solidaria"</p>
+                            <p class="text-xs text-blue-600">Huvaití Edic, 2022</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">"Por una construcción colectiva. Comunicación para la organización y la economía comunitarias"</p>
+                            <p class="text-xs text-blue-600">Huvaití Edic, 2022</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">"Memorias y buenas prácticas de la Comunicación Solidaria en la Ciudad de Buenos Aires"</p>
+                            <p class="text-xs text-blue-600">Creative-Commons 4.0, 2020</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">"Manual de Trabajo y Reflexión sobre Comunicación"</p>
+                            <p class="text-xs text-blue-600">MDS, 2011</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">"Procesos en Construcción. Experiencias y reflexiones desde lo social"</p>
+                            <p class="text-xs text-blue-600">PNUD, 2007</p>
+                        </div>
+                        
+                        <div class="publication-item">
+                            <p class="text-sm text-gray-800 font-medium">Artículos en diversos medios sobre comunicación y economía social</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Columna derecha -->
+            <div class="w-full md:w-2/3 pl-0 md:pl-8 space-y-8">
+                <!-- Proyectos -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        PROYECTOS
+                    </h2>
+                    
+                    <div class="timeline-item pl-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-base font-semibold text-gray-800">Universidad Nacional de Tres de Febrero</h3>
+                            <span class="text-sm text-blue-600 font-medium">2023 - 2024</span>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Coordinación institucional del proyecto "Fortalecimiento de la comercialización de la Red de Alimentos Cooperativos" (MinCyT-PATEP-2024)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Cursos de Especialización -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800 section-title">
+                        CURSOS DE ESPECIALIZACIÓN
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Cuál será el impacto de la IA para trabajadores en la región</p>
+                                    <p class="text-xs text-gray-600">PNUD</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2025</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Herramientas digitales para el desarrollo de organizaciones</p>
+                                    <p class="text-xs text-gray-600">UNQ</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2024</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Formación de instructores: herramientas para el diseño de actividades de capacitación</p>
+                                    <p class="text-xs text-gray-600">INAP</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Comunicación gubernamental y redes sociales: desafíos para la administración pública</p>
+                                    <p class="text-xs text-gray-600">INAP</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Tecnologías emergentes, Especialización en gestión de iniciativas económicas colaborativas y de economía social solidaria</p>
+                                    <p class="text-xs text-gray-600">TEC</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2020</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-800 font-medium">Seminario sobre Prensa en ONG's</p>
+                                    <p class="text-xs text-gray-600">Fundación Telefónica</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">2004</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Pie de página -->
+
+        <div class="absolute bottom-5 w-full text-center text-xs text-gray-500 py-2 border-t border-gray-200">
+            <p>Curriculum Vitae - Mauro Limas - Actualizado: Mayo 2025</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
